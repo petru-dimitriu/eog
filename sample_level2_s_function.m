@@ -178,104 +178,82 @@ set(fig,'Position',[0 0 scrsz(3) scrsz(4)])
 set(gca,'position',[0 0 1 1],'units','normalized') %fara margini
 
 
-
 block.Dwork(1).Data = zeros(1,128); % 0.5 sec
 block.Dwork(2).Data = zeros(1,128);
 block.Dwork(4).Data = zeros(1,2);
 block.Dwork(5).Data = zeros(1,2);
 block.Dwork(6).Data = [1 1 0]; %index
-
-% doar exemplu!!!!
-global fig hadles
-
-fig = figure();
-handles = guihandles(fig);
-
-handles.PlotAxe = axes();
-
-handles.c1 = rectangle(,'Parent',handles.PlotAxe);
-
-set(handles.c1,'propname','propvalue');
+% ...
 
 end
 
 %% %%%%%%%%%%%%%%%%%%%%%% UPDATE FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function Update(block)
-scrsz = get(groot,'ScreenSize');
-width=scrsz(3);
-height=scrsz(4)-25;
-posc1 = [width/2 height-60 1 1];
-posc2 = [width-60 height/2 1 1];
-posc3 = [width/2 60 1 1];
-posc4 = [60 height/2 1 1];
-posc5 = [width/2 height/2 1 1];
-c1 = rectangle('Position',posc1,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %sus
-c2 = rectangle('Position',posc2,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %dreapta
-c3 = rectangle('Position',posc3,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %jos
-c4 = rectangle('Position',posc4,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %stanga
-c5 = rectangle('Position',posc5,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %centru
-%set(c1,'visible','off')
-set(c2,'visible','off')
-set(c3,'visible','off')
-set(c4,'visible','off')
-set(c5,'visible','off')
-%for i=0:4
-% eliminare mean/functii matlab
 
-if block.CurrentTime<10
-   i=0;
+   i = 0; 
 
+if block.CurrentTime > 5  && block.Dwork(6).Data(3) < 5
+    i = 0;
+    scrsz = get(groot,'ScreenSize');
+    width=scrsz(3);
+    height=scrsz(4)-25;
+    posc1 = [width/2-60 height-120 120 120];
+    c1 = rectangle('Position',posc1,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %sus
 end
-if block.CurrentTime>=10 && block.CurrentTime<20
-   i=1;
-   set(c2,'visible','on')
-
-end
-if block.CurrentTime>=20 && block.CurrentTime<30
-   i=2;
-    set(c3,'visible','on')
-
-end
-if block.CurrentTime>=30 && block.CurrentTime<40
-   i=3;
-   set(c4,'visible','on')
-  
-end
-if block.CurrentTime>=40 && block.CurrentTime<50
-   i=4;
-   set(c5,'visible','on')
-
-end
-if block.CurrentTime>=50 
-   i=50;
-   block.Dwork(9).Data
-   block.Dwork(10).Data
-end
-if block.CurrentTime > 10 && block.Dwork(6).Data(3) < 10
+if block.CurrentTime > 15 && block.Dwork(6).Data(3) < 15
+    i = 1;
+  %  set(c1,'visible','on');
+      scrsz = get(groot,'ScreenSize');
+    width=scrsz(3);
+    height=scrsz(4)-25;
+    posc2 = [width-120 height/2-60 120 120];
+   c2 = rectangle('Position',posc2,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %dreapta 
    block.Dwork(6).Data(1)=1;
    block.Dwork(9).Data(1) = mean(block.Dwork(7).Data);
    block.Dwork(10).Data(1) = mean(block.Dwork(8).Data);
    block.Dwork(6).Data(2) = 1;
 end
-if block.CurrentTime > 20 && block.Dwork(6).Data(3) < 20
+if block.CurrentTime > 25 && block.Dwork(6).Data(3) < 25
+    i = 2;
+    %set(c2,'visible','off')
+        scrsz = get(groot,'ScreenSize');
+    width=scrsz(3);
+    height=scrsz(4)-25;
+    posc3 = [width/2-60 0 120 120];
+    c3 = rectangle('Position',posc3,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %jos
    block.Dwork(6).Data(1)=1;
    block.Dwork(9).Data(2) = mean(block.Dwork(7).Data);
    block.Dwork(10).Data(2) = mean(block.Dwork(8).Data);
    block.Dwork(6).Data(2) = 1;
 end
-if block.CurrentTime > 30 && block.Dwork(6).Data(3) < 30
+if block.CurrentTime > 35 && block.Dwork(6).Data(3) < 35
+    i = 3;
+    %set(c3,'visible','off')
+        scrsz = get(groot,'ScreenSize');
+    width=scrsz(3);
+    height=scrsz(4)-25;
+    posc4 = [0 height/2-60 120 120];
+    c4 = rectangle('Position',posc4,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %stanga
    block.Dwork(6).Data(1)=1;
    block.Dwork(9).Data(3) = mean(block.Dwork(7).Data);
    block.Dwork(10).Data(3) = mean(block.Dwork(8).Data);
    block.Dwork(6).Data(2) = 1;
 end
-if block.CurrentTime > 40 && block.Dwork(6).Data(3) < 40
+if block.CurrentTime > 45 && block.Dwork(6).Data(3) < 45
+    i = 4;
+    %set(c4,'visible','off')
+        scrsz = get(groot,'ScreenSize');
+    width=scrsz(3);
+    height=scrsz(4)-25;
+    posc5 = [width/2-60 height/2-60 120 120];
+    c5 = rectangle('Position',posc5,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %centru
    block.Dwork(6).Data(1)=1;
    block.Dwork(9).Data(4) = mean(block.Dwork(7).Data);
    block.Dwork(10).Data(4) = mean(block.Dwork(8).Data);
    block.Dwork(6).Data(2) = 1;
 end
-if block.CurrentTime > 50 && block.Dwork(6).Data(3) < 50
+if block.CurrentTime > 55 && block.Dwork(6).Data(3) < 55
+    i = 50;
    block.Dwork(9).Data(5) = mean(block.Dwork(7).Data);
    block.Dwork(10).Data(5) = mean(block.Dwork(8).Data);
    block.Dwork(6).Data(2) = 1;
@@ -283,42 +261,42 @@ end
  %   for j=60:-1:10
 % block.CurrentTime
        
-        if i==0
-            set(c1,'Position',[width/2-block.Dwork(6).Data(1) height-60-block.Dwork(6).Data(1) block.Dwork(6).Data(1)*2 block.Dwork(6).Data(1)*2]);
+        if i==0 && block.CurrentTime >= 5
+      
             block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
             %block.Dwork(7).Data(block.Dwork(6).Data(2))
             block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
           %  block.Dwork(8).Data(block.Dwork(6).Data(2))
            % block.InputPort(2).Data
         end
-        if i==1
+        if i==1 && block.CurrentTime > 5
             %set(c1,'visible','on')
 
-            set(c2,'Position',[width-60-block.Dwork(6).Data(1) height/2-block.Dwork(6).Data(1) block.Dwork(6).Data(1)*2 block.Dwork(6).Data(1)*2]);
+           
             block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
             %block.Dwork(7).Data(block.Dwork(6).Data(2))
             block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
             %block.Dwork(8).Data(block.Dwork(6).Data(2))
         end
-        if i==2
+        if i==2 && block.CurrentTime > 5
             %set(c1,'visible','on')
-            set(c3,'Position',[width/2-block.Dwork(6).Data(1) 60-block.Dwork(6).Data(1) block.Dwork(6).Data(1)*2 block.Dwork(6).Data(1)*2]);
+           
             block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
             %block.Dwork(7).Data(block.Dwork(6).Data(2))
             block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
             %block.Dwork(8).Data(block.Dwork(6).Data(2))
         end
-        if i==3
+        if i==3 && block.CurrentTime > 5
             %set(c1,'visible','on')
-            set(c4,'Position',[60-block.Dwork(6).Data(1) height/2-block.Dwork(6).Data(1) block.Dwork(6).Data(1)*2 block.Dwork(6).Data(1)*2]);
+           
             block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
             %block.Dwork(7).Data(block.Dwork(6).Data(2))
             block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
             %block.Dwork(8).Data(block.Dwork(6).Data(2))
         end
-        if i==4
+        if i==4 && block.CurrentTime > 5
             %set(c1,'visible','on')
-            set(c5,'Position',[width/2-block.Dwork(6).Data(1) height/2-block.Dwork(6).Data(1) block.Dwork(6).Data(1)*2 block.Dwork(6).Data(1)*2]);
+           
             block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
             %block.Dwork(7).Data(block.Dwork(6).Data(2))
             block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
@@ -328,7 +306,7 @@ end
         block.Dwork(6).Data(1)=block.Dwork(6).Data(1)+1;
         block.Dwork(6).Data(2)=block.Dwork(6).Data(2)+1;
         if i==50
-            block.Dwork(8).Data(1:256);
+            block.Dwork(8).Data(1:256)
         end
       
  %   end
