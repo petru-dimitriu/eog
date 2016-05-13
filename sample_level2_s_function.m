@@ -190,10 +190,8 @@ end
 %% %%%%%%%%%%%%%%%%%%%%%% UPDATE FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function Update(block)
 
-   i = 0; 
 
 if block.CurrentTime > 5  && block.CurrentTime < 6
-    i = 0;
     scrsz = get(groot,'ScreenSize');
     width=scrsz(3);
     height=scrsz(4)-25;
@@ -201,114 +199,93 @@ if block.CurrentTime > 5  && block.CurrentTime < 6
     c1 = rectangle('Position',posc1,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %sus
 end
 if block.CurrentTime > 15 && block.CurrentTime < 16
-    i = 1;
-  %  set(c1,'visible','on');
-      scrsz = get(groot,'ScreenSize');
+    scrsz = get(groot,'ScreenSize');
     width=scrsz(3);
     height=scrsz(4)-25;
     posc2 = [width-120 height/2-60 120 120];
    c2 = rectangle('Position',posc2,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %dreapta 
-   block.Dwork(6).Data(1)=1;
-   block.Dwork(9).Data(1) = mean(block.Dwork(7).Data);
-   block.Dwork(10).Data(1) = mean(block.Dwork(8).Data);
-   block.Dwork(6).Data(2) = 1;
+
 end
 if block.CurrentTime > 25 && block.CurrentTime < 26
-    i = 2;
-    %set(c2,'visible','off')
-        scrsz = get(groot,'ScreenSize');
+    scrsz = get(groot,'ScreenSize');
     width=scrsz(3);
     height=scrsz(4)-25;
     posc3 = [width/2-60 0 120 120];
     c3 = rectangle('Position',posc3,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %jos
-   block.Dwork(6).Data(1)=1;
-   block.Dwork(9).Data(2) = mean(block.Dwork(7).Data);
-   block.Dwork(10).Data(2) = mean(block.Dwork(8).Data);
-   block.Dwork(6).Data(2) = 1;
 end
 if block.CurrentTime > 35 && block.CurrentTime < 36
-    i = 3;
-    %set(c3,'visible','off')
-        scrsz = get(groot,'ScreenSize');
+    scrsz = get(groot,'ScreenSize');
     width=scrsz(3);
     height=scrsz(4)-25;
     posc4 = [0 height/2-60 120 120];
     c4 = rectangle('Position',posc4,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %stanga
-   block.Dwork(6).Data(1)=1;
-   block.Dwork(9).Data(3) = mean(block.Dwork(7).Data);
-   block.Dwork(10).Data(3) = mean(block.Dwork(8).Data);
-   block.Dwork(6).Data(2) = 1;
+
 end
 if block.CurrentTime > 45 && block.CurrentTime < 46
-    i = 4;
-    %set(c4,'visible','off')
-        scrsz = get(groot,'ScreenSize');
+    
+    scrsz = get(groot,'ScreenSize');
     width=scrsz(3);
     height=scrsz(4)-25;
     posc5 = [width/2-60 height/2-60 120 120];
     c5 = rectangle('Position',posc5,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %centru
-   block.Dwork(6).Data(1)=1;
-   block.Dwork(9).Data(4) = mean(block.Dwork(7).Data);
-   block.Dwork(10).Data(4) = mean(block.Dwork(8).Data);
-   block.Dwork(6).Data(2) = 1;
+
 end
-if block.CurrentTime > 55 block.CurrentTime < 56
-    i = 50;
+if block.CurrentTime > 55 && block.CurrentTime < 56
    block.Dwork(9).Data(5) = mean(block.Dwork(7).Data);
    block.Dwork(10).Data(5) = mean(block.Dwork(8).Data);
-   block.Dwork(6).Data(2) = 1;
 end
- %   for j=60:-1:10
-% block.CurrentTime
-       
-        if i==0 && block.CurrentTime >= 5
-      
-            block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-            %block.Dwork(7).Data(block.Dwork(6).Data(2))
-            block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-          %  block.Dwork(8).Data(block.Dwork(6).Data(2))
-           % block.InputPort(2).Data
-        end
-        if i==1 && block.CurrentTime > 5
-            %set(c1,'visible','on')
 
-           
-            block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-            %block.Dwork(7).Data(block.Dwork(6).Data(2))
-            block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-            %block.Dwork(8).Data(block.Dwork(6).Data(2))
-        end
-        if i==2 && block.CurrentTime > 5
-            %set(c1,'visible','on')
-           
-            block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-            %block.Dwork(7).Data(block.Dwork(6).Data(2))
-            block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-            %block.Dwork(8).Data(block.Dwork(6).Data(2))
-        end
-        if i==3 && block.CurrentTime > 5
-            %set(c1,'visible','on')
-           
-            block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-            %block.Dwork(7).Data(block.Dwork(6).Data(2))
-            block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-            %block.Dwork(8).Data(block.Dwork(6).Data(2))
-        end
-        if i==4 && block.CurrentTime > 5
-            %set(c1,'visible','on')
-           
-            block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-            %block.Dwork(7).Data(block.Dwork(6).Data(2))
-            block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-            %block.Dwork(8).Data(block.Dwork(6).Data(2))
-        end
-       % pause(0.1)
-        block.Dwork(6).Data(1)=block.Dwork(6).Data(1)+1;
-        block.Dwork(6).Data(2)=block.Dwork(6).Data(2)+1;
-        if i==50
-            block.Dwork(8).Data(1:256)
-        end
-      
+       
+if block.CurrentTime >= 5 && block.CurrentTime < 15
+
+    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+    %block.Dwork(7).Data(block.Dwork(6).Data(2))
+    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
+  %  block.Dwork(8).Data(block.Dwork(6).Data(2))
+   % block.InputPort(2).Data
+end
+if block.CurrentTime >= 15 && block.CurrentTime < 25
+    %set(c1,'visible','on')
+
+
+    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+    %block.Dwork(7).Data(block.Dwork(6).Data(2))
+    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
+    %block.Dwork(8).Data(block.Dwork(6).Data(2))
+end
+if block.CurrentTime >= 25 && block.CurrentTime < 35
+    %set(c1,'visible','on')
+
+    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+    %block.Dwork(7).Data(block.Dwork(6).Data(2))
+    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
+    %block.Dwork(8).Data(block.Dwork(6).Data(2))
+end
+if block.CurrentTime >= 35 && block.CurrentTime < 45
+    %set(c1,'visible','on')
+
+    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+    %block.Dwork(7).Data(block.Dwork(6).Data(2))
+    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
+    %block.Dwork(8).Data(block.Dwork(6).Data(2))
+end
+if block.CurrentTime >= 45 && block.CurrentTime < 55
+    %set(c1,'visible','on')
+    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+    
+    
+    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
+    if block.Dwork(6).Data(2)==12800
+        block.Dwork(7).Data(1:256)
+    end
+    %block.Dwork(8).Data(block.Dwork(6).Data(2))
+end
+% pause(0.1)
+if block.CurrentTime >= 5
+%block.Dwork(6).Data(1)=block.Dwork(6).Data(1)+1;
+block.Dwork(6).Data(2)=block.Dwork(6).Data(2)+1;
+end
+
  %   end
    
 %end
