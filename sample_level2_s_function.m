@@ -129,7 +129,7 @@ block.Dwork(5).UsedAsDiscState = false;
 
 % indexes
 block.Dwork(6).Name            = 'dwork6';
-block.Dwork(6).Dimensions      = 3;
+block.Dwork(6).Dimensions      = 2;
 block.Dwork(6).DatatypeID      = 0;      % double
 block.Dwork(6).Complexity      = 'Real'; % real
 block.Dwork(6).UsedAsDiscState = false;
@@ -182,7 +182,7 @@ block.Dwork(1).Data = zeros(1,128); % 0.5 sec
 block.Dwork(2).Data = zeros(1,128);
 block.Dwork(4).Data = zeros(1,2);
 block.Dwork(5).Data = zeros(1,2);
-block.Dwork(6).Data = [1 1 0]; %index
+block.Dwork(6).Data = [1 1]; %index
 % ...
 
 end
@@ -192,7 +192,7 @@ function Update(block)
 
    i = 0; 
 
-if block.CurrentTime > 5  && block.Dwork(6).Data(3) < 5
+if block.CurrentTime > 5  && block.CurrentTime < 6
     i = 0;
     scrsz = get(groot,'ScreenSize');
     width=scrsz(3);
@@ -200,7 +200,7 @@ if block.CurrentTime > 5  && block.Dwork(6).Data(3) < 5
     posc1 = [width/2-60 height-120 120 120];
     c1 = rectangle('Position',posc1,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %sus
 end
-if block.CurrentTime > 15 && block.Dwork(6).Data(3) < 15
+if block.CurrentTime > 15 && block.CurrentTime < 16
     i = 1;
   %  set(c1,'visible','on');
       scrsz = get(groot,'ScreenSize');
@@ -213,7 +213,7 @@ if block.CurrentTime > 15 && block.Dwork(6).Data(3) < 15
    block.Dwork(10).Data(1) = mean(block.Dwork(8).Data);
    block.Dwork(6).Data(2) = 1;
 end
-if block.CurrentTime > 25 && block.Dwork(6).Data(3) < 25
+if block.CurrentTime > 25 && block.CurrentTime < 26
     i = 2;
     %set(c2,'visible','off')
         scrsz = get(groot,'ScreenSize');
@@ -226,7 +226,7 @@ if block.CurrentTime > 25 && block.Dwork(6).Data(3) < 25
    block.Dwork(10).Data(2) = mean(block.Dwork(8).Data);
    block.Dwork(6).Data(2) = 1;
 end
-if block.CurrentTime > 35 && block.Dwork(6).Data(3) < 35
+if block.CurrentTime > 35 && block.CurrentTime < 36
     i = 3;
     %set(c3,'visible','off')
         scrsz = get(groot,'ScreenSize');
@@ -239,7 +239,7 @@ if block.CurrentTime > 35 && block.Dwork(6).Data(3) < 35
    block.Dwork(10).Data(3) = mean(block.Dwork(8).Data);
    block.Dwork(6).Data(2) = 1;
 end
-if block.CurrentTime > 45 && block.Dwork(6).Data(3) < 45
+if block.CurrentTime > 45 && block.CurrentTime < 46
     i = 4;
     %set(c4,'visible','off')
         scrsz = get(groot,'ScreenSize');
@@ -252,7 +252,7 @@ if block.CurrentTime > 45 && block.Dwork(6).Data(3) < 45
    block.Dwork(10).Data(4) = mean(block.Dwork(8).Data);
    block.Dwork(6).Data(2) = 1;
 end
-if block.CurrentTime > 55 && block.Dwork(6).Data(3) < 55
+if block.CurrentTime > 55 block.CurrentTime < 56
     i = 50;
    block.Dwork(9).Data(5) = mean(block.Dwork(7).Data);
    block.Dwork(10).Data(5) = mean(block.Dwork(8).Data);
@@ -345,8 +345,6 @@ else
 end
 
 block.Dwork(5).Data(1)=block.Dwork(5).Data(2);
-
-block.Dwork(6).Data(3)=block.CurrentTime;
 
 end
 
