@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.16"
+    ComputedModelVersion    "1.19"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -30,7 +30,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [227.0, 68.0, 1382.0, 744.0]
+      Location		      [119.0, 174.0, 1382.0, 744.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -56,7 +56,7 @@ Model {
 	LoadSaveID		"0"
 	Extents			[1332.0, 569.0]
 	ZoomFactor		[1.0]
-	Offset			[-29.676190476190413, -33.873809523809427]
+	Offset			[-14.176190476190413, 31.751190476190573]
       }
     }
   }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "andre"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed May 11 13:39:52 2016"
-  RTWModifiedTimeStamp	  384874180
-  ModelVersionFormat	  "1.%<AutoIncrement:16>"
+  LastModifiedDate	  "Fri May 13 19:39:33 2016"
+  RTWModifiedTimeStamp	  385068956
+  ModelVersionFormat	  "1.%<AutoIncrement:19>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -670,7 +670,7 @@ Model {
       }
       Name		      "Configuration"
       CurrentDlgPage	      "Solver"
-      ConfigPrmDlgPosition     [ 333, 51, 1601, 907 ] 
+      ConfigPrmDlgPosition     [ 317, -11, 1617, 923 ] 
     }
     PropName		    "ConfigurationSets"
   }
@@ -771,7 +771,7 @@ Model {
   }
   System {
     Name		    "sample_level2_sfcn_block"
-    Location		    [227, 68, 1609, 812]
+    Location		    [119, 174, 1501, 918]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -785,7 +785,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "18"
+    SIDHighWatermark	    "19"
     Block {
       BlockType		      M-S-Function
       Name		      "Coactivation"
@@ -845,10 +845,10 @@ Model {
     Block {
       BlockType		      Reference
       Name		      "RTclock"
-      SID		      "15"
+      SID		      "19"
       Ports		      []
-      Position		      [905, 185, 1020, 299]
-      ZOrder		      8
+      Position		      [795, 445, 910, 559]
+      ZOrder		      12
       LibraryVersion	      "1.7"
       SourceBlock	      "rt_clock_lib/RTclock"
       SourceType	      "RT clock"
