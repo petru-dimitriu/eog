@@ -199,7 +199,11 @@ end
 %% %%%%%%%%%%%%%%%%%%%%%% UPDATE FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function Update(block)
 
+
 %draw circles
+
+
+
 if block.CurrentTime > 5  && block.CurrentTime < 6
     scrsz = get(groot,'ScreenSize');
     width=scrsz(3);
@@ -230,7 +234,8 @@ if block.CurrentTime > 35 && block.CurrentTime < 36
     c4 = rectangle('Position',posc4,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %stanga
 
 end
-if block.CurrentTime > 45 && block.CurrentTime < 46  
+if block.CurrentTime > 45 && block.CurrentTime < 46
+    
     scrsz = get(groot,'ScreenSize');
     width=scrsz(3);
     height=scrsz(4)-25;
@@ -305,6 +310,60 @@ if block.CurrentTime >=60
 end
 %end transformarea fereastra poarta
 
+       
+if block.CurrentTime >= 5 && block.CurrentTime < 15
+
+    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+    %block.Dwork(7).Data(block.Dwork(6).Data(2))
+    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
+  %  block.Dwork(8).Data(block.Dwork(6).Data(2))
+   % block.InputPort(2).Data
+end
+if block.CurrentTime >= 15 && block.CurrentTime < 25
+    %set(c1,'visible','on')
+
+
+    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+    %block.Dwork(7).Data(block.Dwork(6).Data(2))
+    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
+    %block.Dwork(8).Data(block.Dwork(6).Data(2))
+end
+if block.CurrentTime >= 25 && block.CurrentTime < 35
+    %set(c1,'visible','on')
+
+    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+    %block.Dwork(7).Data(block.Dwork(6).Data(2))
+    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
+    %block.Dwork(8).Data(block.Dwork(6).Data(2))
+end
+if block.CurrentTime >= 35 && block.CurrentTime < 45
+    %set(c1,'visible','on')
+
+    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+    %block.Dwork(7).Data(block.Dwork(6).Data(2))
+    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
+    %block.Dwork(8).Data(block.Dwork(6).Data(2))
+end
+if block.CurrentTime >= 45 && block.CurrentTime < 55
+    %set(c1,'visible','on')
+    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+    
+    
+    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
+    if block.Dwork(6).Data(2)==12800
+        block.Dwork(7).Data(1:256)
+    end
+    %block.Dwork(8).Data(block.Dwork(6).Data(2))
+end
+% pause(0.1)
+if block.CurrentTime >= 5
+%block.Dwork(6).Data(1)=block.Dwork(6).Data(1)+1;
+block.Dwork(6).Data(2)=block.Dwork(6).Data(2)+1;
+end
+
+ %   end
+   
+%end
 block.Dwork(1).Data(1:127) = block.Dwork(1).Data(2:128); % mut la stanga vectorul
 block.Dwork(1).Data(128) = block.InputPort(1).Data;
 block.Dwork(3).Data(1) = mean(block.Dwork(1).Data); %medie ch1
