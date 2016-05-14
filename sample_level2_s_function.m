@@ -287,18 +287,18 @@ if block.CurrentTime >= 5
 %     block.Dwork(10).Data(2) = -5.0168e+03;
 %     block.Dwork(10).Data(4) = -3.9457e+03;
         
-    eogHeight = 1000;
+    eogHeight = 150;
     %abs(block.Dwork(9).Data(1) - block.Dwork(9).Data(3));
-    eogWidth = 2050;
+    eogWidth = 140;%1200;
     %abs(block.Dwork(10).Data(2) - block.Dwork(10).Data(4));
     
     pixelHeight = eogHeight / scrHeight;
     pixelWidth = eogWidth / scrWidth;
     %pixelHeight
-    block.Dwork(11).Data(1) = abs(block.InputPort(1).Data + 15450) / pixelHeight;
+    block.Dwork(11).Data(1) = abs(block.Dwork(4).Data(2) + 200) / pixelHeight;
     %block.Dwork(11).Data(1)
 %     block.InputPort(1).Data
-    block.Dwork(11).Data(2) = abs(block.InputPort(2).Data + 84000) / pixelWidth;
+    block.Dwork(11).Data(2) = abs(block.Dwork(5).Data(2) + 160) / pixelWidth;
 %     block.InputPort(2).Data
     set(0,'PointerLocation',[block.Dwork(11).Data(2) block.Dwork(11).Data(1)]);
     %block.Dwork(11).Data(2)
@@ -316,9 +316,9 @@ block.Dwork(3).Data(2) = mean(block.Dwork(2).Data); %medie ch2
 threshold = 45;
 fraction = 1/6;
 
-if block.Dwork(1).Data(128) > block.Dwork(3).Data(1) + threshold %&& abs(block.Dwork(1).Data(128)-block.Dwork(1).Data(floor(128-128*fraction)))>=threshold
+if block.Dwork(1).Data(128) > block.Dwork(3).Data(1) + threshold && abs(block.Dwork(1).Data(128)-block.Dwork(1).Data(floor(128-128*fraction)))>=threshold
     block.Dwork(4).Data(2) = block.Dwork(4).Data(1)+1;
-elseif block.Dwork(1).Data(128) < block.Dwork(3).Data(1) - threshold %&& abs(block.Dwork(1).Data(128)-block.Dwork(1).Data(floor(128-128*fraction)))>=threshold
+elseif block.Dwork(1).Data(128) < block.Dwork(3).Data(1) - threshold && abs(block.Dwork(1).Data(128)-block.Dwork(1).Data(floor(128-128*fraction)))>=threshold
     block.Dwork(4).Data(2) = block.Dwork(4).Data(1)-1;
 else
     block.Dwork(4).Data(2) = block.Dwork(4).Data(1);
@@ -326,12 +326,12 @@ end
 
 block.Dwork(4).Data(1)=block.Dwork(4).Data(2);
 
-threshold = 0.1;
-fraction = 1/6;
+threshold = 67;
+fraction = 1/8;
 
-if block.Dwork(2).Data(128) > block.Dwork(3).Data(2) + threshold %&& abs(block.Dwork(2).Data(128)-block.Dwork(2).Data(floor(128-128*fraction)))>=threshold
+if block.Dwork(2).Data(128) > block.Dwork(3).Data(2) + threshold && abs(block.Dwork(2).Data(128)-block.Dwork(2).Data(floor(128-128*fraction)))>=threshold
     block.Dwork(5).Data(2) = block.Dwork(5).Data(1)+1;
-elseif block.Dwork(2).Data(128) < block.Dwork(3).Data(2) - threshold %&& abs(block.Dwork(2).Data(128)-block.Dwork(2).Data(floor(128-128*fraction)))>=threshold
+elseif block.Dwork(2).Data(128) < block.Dwork(3).Data(2) - threshold && abs(block.Dwork(2).Data(128)-block.Dwork(2).Data(floor(128-128*fraction)))>=threshold
     block.Dwork(5).Data(2) = block.Dwork(5).Data(1)-1;
 else
     block.Dwork(5).Data(2) = block.Dwork(5).Data(1);
