@@ -91,7 +91,7 @@ end
 function DoPostPropSetup(block)
 block.NumDworks = 11;
 
-% dwork1 %ch1 
+% dwork1 %ch1
 block.Dwork(1).Name            = 'Figure';
 block.Dwork(1).Dimensions      = 128;
 block.Dwork(1).DatatypeID      = 0;      % double
@@ -106,16 +106,14 @@ block.Dwork(2).DatatypeID      = 0;      % double
 block.Dwork(2).Complexity      = 'Real'; % real
 block.Dwork(2).UsedAsDiscState = false;
 
-% dwork3 
-%.data(1) = mean ch1 
-%.data(2) = mean ch2
+% dwork3 %medii
 block.Dwork(3).Name            = 'currentMean';
 block.Dwork(3).Dimensions      = 2;
 block.Dwork(3).DatatypeID      = 0;      % double
 block.Dwork(3).Complexity      = 'Real'; % real
 block.Dwork(3).UsedAsDiscState = false;
 
-% dwork2 %out_ve1 
+% dwork2 %out_ve1
 block.Dwork(4).Name            = 'dwork4';
 block.Dwork(4).Dimensions      = 2;
 block.Dwork(4).DatatypeID      = 0;      % double
@@ -173,17 +171,17 @@ end
 %% InitializeConditions
 function InitializeConditions(block)
 % Initialize the figure for use with this simulation
-fig=figure;
-set(0,'DefaultFigureMenu','none'); %no menubar & toolbar
-scrsz = get(groot,'ScreenSize');
-width=scrsz(3);
-height=scrsz(4)-25; %25=title bar height
-axis([0 width 0 height]);
-set(fig,'color','white')
-set(fig,'visible','on')
-set(fig,'Tag','Calibration_fig')
-set(fig,'Position',[0 0 scrsz(3) scrsz(4)])
-set(gca,'position',[0 0 1 1],'units','normalized') %fara margini
+% fig=figure;
+% set(0,'DefaultFigureMenu','none');
+% scrsz = get(groot,'ScreenSize');
+% width=scrsz(3);
+% height=scrsz(4)-25;
+% axis([0 width 0 height]);
+% set(fig,'color','white')
+% set(fig,'visible','on')
+% set(fig,'Tag','Calibration_fig')
+% set(fig,'Position',[0 0 scrsz(3) scrsz(4)])
+% set(gca,'position',[0 0 1 1],'units','normalized') %fara margini
 
 
 block.Dwork(1).Data = zeros(1,128); % 0.5 sec
@@ -199,83 +197,76 @@ end
 %% %%%%%%%%%%%%%%%%%%%%%% UPDATE FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function Update(block)
 
+% %draw circles
+% if block.CurrentTime > 5  && block.CurrentTime < 6
+%     scrsz = get(groot,'ScreenSize');
+%     width=scrsz(3);
+%     height=scrsz(4)-25;
+%     posc1 = [width/2-60 height-120 120 120];
+%     c1 = rectangle('Position',posc1,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %sus
+% end
+% if block.CurrentTime > 15 && block.CurrentTime < 16
+%     scrsz = get(groot,'ScreenSize');
+%     width=scrsz(3);
+%     height=scrsz(4)-25;
+%     posc2 = [width-120 height/2-60 120 120];
+%    c2 = rectangle('Position',posc2,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %dreapta 
+% 
+% end
+% if block.CurrentTime > 25 && block.CurrentTime < 26
+%     scrsz = get(groot,'ScreenSize');
+%     width=scrsz(3);
+%     height=scrsz(4)-25;
+%     posc3 = [width/2-60 0 120 120];
+%     c3 = rectangle('Position',posc3,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %jos
+% end
+% if block.CurrentTime > 35 && block.CurrentTime < 36
+%     scrsz = get(groot,'ScreenSize');
+%     width=scrsz(3);
+%     height=scrsz(4)-25;
+%     posc4 = [0 height/2-60 120 120];
+%     c4 = rectangle('Position',posc4,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %stanga
+% 
+% end
+% if block.CurrentTime > 45 && block.CurrentTime < 46  
+%     scrsz = get(groot,'ScreenSize');
+%     width=scrsz(3);
+%     height=scrsz(4)-25;
+%     posc5 = [width/2-60 height/2-60 120 120];
+%     c5 = rectangle('Position',posc5,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %centru
+% end
+% %end draw circles
 
-%draw circles
+%calcularea mediilor if block.CurrentTime > 55 && block.CurrentTime < 56
+ %block.Dwork(9).Data(5) = mean(block.Dwork(7).Data);
+  % block.Dwork(10).Data(5) = mean(block.Dwork(8).Data);
+%end end calcularea mediilor
 
-
-
-if block.CurrentTime > 5  && block.CurrentTime < 6
-    scrsz = get(groot,'ScreenSize');
-    width=scrsz(3);
-    height=scrsz(4)-25;
-    posc1 = [width/2-60 height-120 120 120];
-    c1 = rectangle('Position',posc1,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %sus
-end
-if block.CurrentTime > 15 && block.CurrentTime < 16
-    scrsz = get(groot,'ScreenSize');
-    width=scrsz(3);
-    height=scrsz(4)-25;
-    posc2 = [width-120 height/2-60 120 120];
-   c2 = rectangle('Position',posc2,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %dreapta 
-
-end
-if block.CurrentTime > 25 && block.CurrentTime < 26
-    scrsz = get(groot,'ScreenSize');
-    width=scrsz(3);
-    height=scrsz(4)-25;
-    posc3 = [width/2-60 0 120 120];
-    c3 = rectangle('Position',posc3,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %jos
-end
-if block.CurrentTime > 35 && block.CurrentTime < 36
-    scrsz = get(groot,'ScreenSize');
-    width=scrsz(3);
-    height=scrsz(4)-25;
-    posc4 = [0 height/2-60 120 120];
-    c4 = rectangle('Position',posc4,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %stanga
-
-end
-if block.CurrentTime > 45 && block.CurrentTime < 46
-    
-    scrsz = get(groot,'ScreenSize');
-    width=scrsz(3);
-    height=scrsz(4)-25;
-    posc5 = [width/2-60 height/2-60 120 120];
-    c5 = rectangle('Position',posc5,'FaceColor','red','EdgeColor','red','curvature',[1 1]); %centru
-end
-%end draw circles
-
-%calcularea mediilor
-if block.CurrentTime > 55 && block.CurrentTime < 56
-   block.Dwork(9).Data(5) = mean(block.Dwork(7).Data);
-   block.Dwork(10).Data(5) = mean(block.Dwork(8).Data);
-end
-%end calcularea mediilor
-
-%transfer input -> dwork(7) si (8)    
-if block.CurrentTime >= 5 && block.CurrentTime < 15
-    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-end
-if block.CurrentTime >= 15 && block.CurrentTime < 25
-    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-end
-if block.CurrentTime >= 25 && block.CurrentTime < 35
-    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;  
-end
-if block.CurrentTime >= 35 && block.CurrentTime < 45
-    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-end
-if block.CurrentTime >= 45 && block.CurrentTime < 55
-    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-    if block.Dwork(6).Data(2)==12800
-        block.Dwork(7).Data(1:256);
-    end
-end
-%end transfer input -> dwork(7) si (8)
+% %transfer input -> dwork(7) si (8)
+% if block.CurrentTime >= 5 && block.CurrentTime < 15
+%     block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+%     block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
+% end
+% if block.CurrentTime >= 15 && block.CurrentTime < 25
+%     block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+%     block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
+% end
+% if block.CurrentTime >= 25 && block.CurrentTime < 35
+%     block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+%     block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;  
+% end
+% if block.CurrentTime >= 35 && block.CurrentTime < 45
+%     block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+%     block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
+% end
+% if block.CurrentTime >= 45 && block.CurrentTime < 55
+%     block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
+%     block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
+%     if block.Dwork(6).Data(2)==12800
+%         block.Dwork(7).Data(1:256);
+%     end
+% end
+% %end transfer input -> dwork(7) si (8)
 
 %increment index
 if block.CurrentTime >= 5
@@ -285,85 +276,35 @@ end
 %end increment index
 
 %transformarea fereastra poarta
-if block.CurrentTime >=60
+%set(0,'PointerLocation',[960 540]);
+if block.CurrentTime >= 5
     scrsz = get(groot,'ScreenSize');
     scrHeight = scrsz(4)-25 - 120;  %de ce -25???
     scrWidth = scrsz(3) - 120;
     
-    %comment if not testing
-    block.Dwork(9).Data(1) = 1.0563e+04; 
-    block.Dwork(9).Data(3) = 9.6484e+03;
-    block.Dwork(10).Data(2) = -3.9457e+03;
-    block.Dwork(10).Data(4) = -5.0168e+03;
-    % 
-    
-    eogHeight = block.Dwork(9).Data(1) - block.Dwork(9).Data(3);
-    eogWidth = block.Dwork(10).Data(2) - block.Dwork(10).Data(4);
+%     block.Dwork(9).Data(1) = 1.0563e+04;
+%     block.Dwork(9).Data(3) = 9.6484e+03;
+%     block.Dwork(10).Data(2) = -5.0168e+03;
+%     block.Dwork(10).Data(4) = -3.9457e+03;
+        
+    eogHeight = 1000;
+    %abs(block.Dwork(9).Data(1) - block.Dwork(9).Data(3));
+    eogWidth = 2050;
+    %abs(block.Dwork(10).Data(2) - block.Dwork(10).Data(4));
     
     pixelHeight = eogHeight / scrHeight;
     pixelWidth = eogWidth / scrWidth;
-    
-    block.Dwork(11).Data(1) = block.Dwork(4).Data(2) / pixelWidth;
-    block.Dwork(11).Data(1)
-    block.Dwork(11).Data(2) = block.Dwork(5).Data(2) / pixelHeight;
-    block.Dwork(11).Data(2)
+    %pixelHeight
+    block.Dwork(11).Data(1) = abs(block.InputPort(1).Data + 15450) / pixelHeight;
+    %block.Dwork(11).Data(1)
+%     block.InputPort(1).Data
+    block.Dwork(11).Data(2) = abs(block.InputPort(2).Data + 84000) / pixelWidth;
+%     block.InputPort(2).Data
+    set(0,'PointerLocation',[block.Dwork(11).Data(2) block.Dwork(11).Data(1)]);
+    %block.Dwork(11).Data(2)
 end
 %end transformarea fereastra poarta
 
-       
-if block.CurrentTime >= 5 && block.CurrentTime < 15
-
-    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-    %block.Dwork(7).Data(block.Dwork(6).Data(2))
-    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-  %  block.Dwork(8).Data(block.Dwork(6).Data(2))
-   % block.InputPort(2).Data
-end
-if block.CurrentTime >= 15 && block.CurrentTime < 25
-    %set(c1,'visible','on')
-
-
-    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-    %block.Dwork(7).Data(block.Dwork(6).Data(2))
-    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-    %block.Dwork(8).Data(block.Dwork(6).Data(2))
-end
-if block.CurrentTime >= 25 && block.CurrentTime < 35
-    %set(c1,'visible','on')
-
-    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-    %block.Dwork(7).Data(block.Dwork(6).Data(2))
-    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-    %block.Dwork(8).Data(block.Dwork(6).Data(2))
-end
-if block.CurrentTime >= 35 && block.CurrentTime < 45
-    %set(c1,'visible','on')
-
-    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-    %block.Dwork(7).Data(block.Dwork(6).Data(2))
-    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-    %block.Dwork(8).Data(block.Dwork(6).Data(2))
-end
-if block.CurrentTime >= 45 && block.CurrentTime < 55
-    %set(c1,'visible','on')
-    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-    
-    
-    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-    if block.Dwork(6).Data(2)==12800
-        block.Dwork(7).Data(1:256)
-    end
-    %block.Dwork(8).Data(block.Dwork(6).Data(2))
-end
-% pause(0.1)
-if block.CurrentTime >= 5
-%block.Dwork(6).Data(1)=block.Dwork(6).Data(1)+1;
-block.Dwork(6).Data(2)=block.Dwork(6).Data(2)+1;
-end
-
- %   end
-   
-%end
 block.Dwork(1).Data(1:127) = block.Dwork(1).Data(2:128); % mut la stanga vectorul
 block.Dwork(1).Data(128) = block.InputPort(1).Data;
 block.Dwork(3).Data(1) = mean(block.Dwork(1).Data); %medie ch1
@@ -409,6 +350,8 @@ block.OutputPort(3).Data = block.Dwork(3).Data(1);     % mean1
 block.OutputPort(4).Data = block.Dwork(3).Data(2);     % mean2
 block.OutputPort(5).Data=block.Dwork(4).Data(2);    %out_ve1
 block.OutputPort(6).Data=block.Dwork(5).Data(2);    %out_ve2
+block.OutputPort(7).Data=block.Dwork(9).Data(5);    %meanCh1
+block.OutputPort(8).Data=block.Dwork(10).Data(5);   %meanCh2
 
 end
 %% Terminate
