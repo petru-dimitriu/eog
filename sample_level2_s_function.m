@@ -197,6 +197,45 @@ end
 %% %%%%%%%%%%%%%%%%%%%%%% UPDATE FUNCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function Update(block)
 
+%prelucrare date
+
+    block.Dwork(1).Data(1:127) = block.Dwork(1).Data(2:128); % mut la stanga vectorul
+    block.Dwork(1).Data(128) = block.InputPort(1).Data;
+    block.Dwork(3).Data(1) = mean(block.Dwork(1).Data); %medie ch1
+
+    block.Dwork(2).Data(1:127) = block.Dwork(2).Data(2:128); % mut la stanga vectorul
+    block.Dwork(2).Data(128) = block.InputPort(2).Data;
+    block.Dwork(3).Data(2) = mean(block.Dwork(2).Data); %medie ch2
+
+    if block.CurrentTime > 3
+    threshold = 45;
+    fraction = 1/6;
+
+    if block.Dwork(1).Data(128) > block.Dwork(3).Data(1) + threshold && abs(block.Dwork(1).Data(128)-block.Dwork(1).Data(floor(128-128*fraction)))>=threshold
+        block.Dwork(4).Data(2) = block.Dwork(4).Data(1)+1;
+    elseif block.Dwork(1).Data(128) < block.Dwork(3).Data(1) - threshold && abs(block.Dwork(1).Data(128)-block.Dwork(1).Data(floor(128-128*fraction)))>=threshold
+        block.Dwork(4).Data(2) = block.Dwork(4).Data(1)-1;
+    else
+        block.Dwork(4).Data(2) = block.Dwork(4).Data(1);
+    end
+
+    block.Dwork(4).Data(1)=block.Dwork(4).Data(2);
+
+    threshold = 67;
+    fraction = 1/8;
+
+    if block.Dwork(2).Data(128) > block.Dwork(3).Data(2) + threshold && abs(block.Dwork(2).Data(128)-block.Dwork(2).Data(floor(128-128*fraction)))>=threshold
+        block.Dwork(5).Data(2) = block.Dwork(5).Data(1)+1;
+    elseif block.Dwork(2).Data(128) < block.Dwork(3).Data(2) - threshold && abs(block.Dwork(2).Data(128)-block.Dwork(2).Data(floor(128-128*fraction)))>=threshold
+        block.Dwork(5).Data(2) = block.Dwork(5).Data(1)-1;
+    else
+        block.Dwork(5).Data(2) = block.Dwork(5).Data(1);
+    end
+
+    block.Dwork(5).Data(1)=block.Dwork(5).Data(2);
+    end
+    %end prelucrare date
+
 % %draw circles
 % if block.CurrentTime > 5  && block.CurrentTime < 6
 %     scrsz = get(groot,'ScreenSize');
@@ -237,28 +276,58 @@ function Update(block)
 % end
 % %end draw circles
 
-%calcularea mediilor if block.CurrentTime > 55 && block.CurrentTime < 56
- %block.Dwork(9).Data(5) = mean(block.Dwork(7).Data);
-  % block.Dwork(10).Data(5) = mean(block.Dwork(8).Data);
-%end end calcularea mediilor
+%calcularea mediilor
+if block.CurrentTime > 55 && block.CurrentTime < 56
+ block.Dwork(9).Data(5) = mean(block.Dwork(7).Data);
+  block.Dwork(10).Data(5) = mean(block.Dwork(8).Data);
+end 
+%end calcularea mediilor
 
-% %transfer input -> dwork(7) si (8)
-% if block.CurrentTime >= 5 && block.CurrentTime < 15
-%     block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-%     block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-% end
-% if block.CurrentTime >= 15 && block.CurrentTime < 25
-%     block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-%     block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-% end
-% if block.CurrentTime >= 25 && block.CurrentTime < 35
-%     block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-%     block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;  
-% end
-% if block.CurrentTime >= 35 && block.CurrentTime < 45
-%     block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
-%     block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
-% end
+%transfer input -> dwork(7) si (8)
+%if block.CurrentTime >= 5 && block.CurrentTime < 15
+if block.CurrentTime >= 22 && block.CurrentTime < 25 %sus
+    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.Dwork(4).Data(2);
+    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.Dwork(5).Data(2);
+end
+if block.CurrentTime== 25
+    block.Dwork(9).Data(1) = mean(block.Dwork(7).Data(1:2560))*10/3;
+    block.Dwork(10).Data(1) = mean(block.Dwork(8).Data(1:2560))*10/3;
+end
+if block.CurrentTime== 35
+    block.Dwork(9).Data(2) = mean(block.Dwork(7).Data(2561:5120))*10/3;
+    block.Dwork(10).Data(2) = mean(block.Dwork(8).Data(2561:5120))*10/3;
+end
+if block.CurrentTime== 45
+block.Dwork(9).Data(3) = mean(block.Dwork(7).Data(5121:7680))*10/3;
+block.Dwork(10).Data(3) = mean(block.Dwork(8).Data(5121:7680))*10/3;
+end
+if block.CurrentTime== 55
+    block.Dwork(9).Data(4) = mean(block.Dwork(7).Data(7681:10240))*10/3;
+        block.Dwork(10).Data(4) = mean(block.Dwork(8).Data(7681:10240))*10/3;
+    block.Dwork(9).Data(1)
+    block.Dwork(9).Data(2)
+    block.Dwork(9).Data(3)
+    block.Dwork(9).Data(4)
+    block.Dwork(10).Data(1)
+    block.Dwork(10).Data(2)
+    block.Dwork(10).Data(3)
+    block.Dwork(10).Data(4)
+end    
+%if block.CurrentTime >= 15 && block.CurrentTime < 25
+if block.CurrentTime >= 32 && block.CurrentTime < 35
+    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.Dwork(4).Data(2);
+    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.Dwork(5).Data(2);
+end
+%if block.CurrentTime >= 25 && block.CurrentTime < 35
+if block.CurrentTime >= 42 && block.CurrentTime < 45
+    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.Dwork(4).Data(2);
+    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.Dwork(5).Data(2); 
+end
+%if block.CurrentTime >= 35 && block.CurrentTime < 45
+if block.CurrentTime >= 52 && block.CurrentTime < 55
+    block.Dwork(7).Data(block.Dwork(6).Data(2))=block.Dwork(4).Data(2);
+    block.Dwork(8).Data(block.Dwork(6).Data(2))=block.Dwork(5).Data(2);
+end
 % if block.CurrentTime >= 45 && block.CurrentTime < 55
 %     block.Dwork(7).Data(block.Dwork(6).Data(2))=block.InputPort(1).Data;
 %     block.Dwork(8).Data(block.Dwork(6).Data(2))=block.InputPort(2).Data;
@@ -266,10 +335,11 @@ function Update(block)
 %         block.Dwork(7).Data(1:256);
 %     end
 % end
-% %end transfer input -> dwork(7) si (8)
+%end transfer input -> dwork(7) si (8)
+
 
 %increment index
-if block.CurrentTime >= 5
+if block.CurrentTime >= 20
     %block.Dwork(6).Data(1)=block.Dwork(6).Data(1)+1;
     block.Dwork(6).Data(2)=block.Dwork(6).Data(2)+1;
 end
@@ -279,7 +349,7 @@ end
 %set(0,'PointerLocation',[960 540]);
 if block.CurrentTime >= 5
     scrsz = get(groot,'ScreenSize');
-    scrHeight = scrsz(4)-25 - 120;  %de ce -25???
+    scrHeight = scrsz(4)-25 - 120;  %25=title bar height
     scrWidth = scrsz(3) - 120;
     
 %     block.Dwork(9).Data(1) = 1.0563e+04;
@@ -297,55 +367,20 @@ if block.CurrentTime >= 5
     pixelHeight = eogHeight / scrHeight;
     pixelWidth = eogWidth / scrWidth;
     %pixelHeight
-    block.Dwork(11).Data(1) = abs(block.Dwork(4).Data(2) +100) / pixelHeight; %+200 valori sebi
-    %block.Dwork(11).Data(1)
-%     block.InputPort(1).Data
-    block.Dwork(11).Data(2) = abs(block.Dwork(5).Data(2) + 60) / pixelWidth;%+160 sebi
-%     block.InputPort(2).Data
+    block.Dwork(11).Data(1) = abs(block.Dwork(4).Data(2) +81) / pixelHeight; %+200 valori sebi
+   % block.Dwork(11).Data(1)
+    block.Dwork(11).Data(2) = abs(block.Dwork(5).Data(2) + 62) / pixelWidth;%+160 sebi
+   % block.Dwork(11).Data(2)
    set(0,'PointerLocation',[block.Dwork(11).Data(2) block.Dwork(11).Data(1)]);
     %block.Dwork(11).Data(2)
 end
 %end transformarea fereastra poarta
 
-%prelucrare date
 
-    block.Dwork(1).Data(1:127) = block.Dwork(1).Data(2:128); % mut la stanga vectorul
-    block.Dwork(1).Data(128) = block.InputPort(1).Data;
-    block.Dwork(3).Data(1) = mean(block.Dwork(1).Data); %medie ch1
-
-    block.Dwork(2).Data(1:127) = block.Dwork(2).Data(2:128); % mut la stanga vectorul
-    block.Dwork(2).Data(128) = block.InputPort(2).Data;
-    block.Dwork(3).Data(2) = mean(block.Dwork(2).Data); %medie ch2
-
-    if block.CurrentTime > 3
-    threshold = 75;
-    fraction = 1/6;
-
-    if block.Dwork(1).Data(128) > block.Dwork(3).Data(1) + threshold && abs(block.Dwork(1).Data(128)-block.Dwork(1).Data(floor(128-128*fraction)))>=threshold
-        block.Dwork(4).Data(2) = block.Dwork(4).Data(1)+1;
-    elseif block.Dwork(1).Data(128) < block.Dwork(3).Data(1) - threshold && abs(block.Dwork(1).Data(128)-block.Dwork(1).Data(floor(128-128*fraction)))>=threshold
-        block.Dwork(4).Data(2) = block.Dwork(4).Data(1)-1;
-    else
-        block.Dwork(4).Data(2) = block.Dwork(4).Data(1);
-    end
-
-    block.Dwork(4).Data(1)=block.Dwork(4).Data(2);
-
-    threshold = 67;
-    fraction = 1/8;
-
-    if block.Dwork(2).Data(128) > block.Dwork(3).Data(2) + threshold && abs(block.Dwork(2).Data(128)-block.Dwork(2).Data(floor(128-128*fraction)))>=threshold
-        block.Dwork(5).Data(2) = block.Dwork(5).Data(1)+1;
-    elseif block.Dwork(2).Data(128) < block.Dwork(3).Data(2) - threshold && abs(block.Dwork(2).Data(128)-block.Dwork(2).Data(floor(128-128*fraction)))>=threshold
-        block.Dwork(5).Data(2) = block.Dwork(5).Data(1)-1;
-    else
-        block.Dwork(5).Data(2) = block.Dwork(5).Data(1);
-    end
-
-    block.Dwork(5).Data(1)=block.Dwork(5).Data(2);
-    end
 end
-%end prelucrare date
+
+
+
 
 
 

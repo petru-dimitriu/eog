@@ -1,6 +1,6 @@
 load EOG_test2.mat;
 win_size = 128; % 150
-threshold = 45;
+threshold = 75;
 fraction = 1/6;
 
 window = zeros(1,win_size);
