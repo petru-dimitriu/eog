@@ -6,7 +6,7 @@
 \usepackage{enumitem}
 \usepackage{graphicx}
 
-\author{Ș.l. dr. ing. Robert Lupu (coordonator)\\Petru Dimitriu, Sebastian Scînteie, Tudor-Andrei Vrabie}
+\author{conf. dr. ing. Robert Lupu (coordonator)\\asist. dr. ing. Dănuț Irimia (coordonator)\\Petru Dimitriu, Sebastian Scînteie, Tudor-Andrei Vrabie}
 \title{Titlu}
 \geometry{textheight=700pt}
 
@@ -25,15 +25,17 @@
 	
 	\subsection*{Detaliile implementării}
 	\subsubsection*{Pregătirea măsurătorii}
-	Pentru realizarea achiziției de date s–a folosit un dispozitiv (???). Acesta este prevăzut cu (???)
+	Pentru realizarea achiziției de date s–a folosit un dispozitiv gUSBamp. Acesta este prevăzut cu (???)
 	
 	Datele au fost memorate pentru procesare ulterioară folsind mediul MATLAB/Simulink.
 	
 	Pregătirea dispozitivului pentru utilizare presupune aplicarea electrozilor pe fața persoanei pentru care se realizează măsurători, într-o aranjare bine stabilită. Corespunzător cu cele două canale de date pe care le furnizează, electrozii sunt numerotați 1+, 1-, 2+, 2- și 0, cel din urmă fiind electrodul utilizat drept masă în cadrul măsurătorilor. Așezarea electrozilor s-a realizat astfel:
 	\begin{itemize}
 		\item [0] pe frunte
-		\item [1+] sub ochiul drept
-		\item [1-] 
+		\item [1+] deasupra ochiului drept
+		\item [1-] sub ochiul drept
+		\item [2+] la tâmpla stângă
+		\item [2-] la tâmpla dreaptă
 	\end{itemize}
 	\subsubsection*{Realizarea măsurătorii}
 	Folosind Simulink și modulele aferente dispozitivului, s-au realizat 2 măsurători, achiziționând valorile furnizate de dispozitiv și stocându-le într-un fișier  {\tt.mat}, pentru a putea fi utilizate în cadrul unor simulări ulterioare.
@@ -50,15 +52,12 @@
 	Procesarea datelor brute a avut ca scop:
 	\begin{itemize}[noitemsep,nolistsep]
 		\item eliminarea zgomotului
-		\item eliminarea unui trend general semnalului provenit
+		\item eliminarea unui trend general semnalului provenit din funcționarea normală a dispozitivului de achiziție
 		\item simplificarea semnalului pentru obținerea de deplasări uniforme ale indicatorului mausului
 	\end{itemize}
 	
-	Pentru procesarea s-a realizat un filtru după cum astfel. 
+	Pentru procesarea s-a realizat un filtru după cum urmează. 
 	
-	\end{multicols}
-	
-	\begin{multicols}{2}
 	Pentru procesare, s-a utilizat o fereastră de 0,5 secunde, adică 128 de eșantioane de date.
 	
 	De asemenea, s-au utilizat, pentru fiecare canal, o \textit{valoare de prag} și un raport subunitar, numit \textit{fracție}.
