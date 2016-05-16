@@ -42,7 +42,7 @@
 	
 	De fiecare dată, s-a avut în vedere eliminarea unei perioade inițiale de 5 secunde pentru a permite atingerea regimului staționar al semnalului furnizat imediat după pornirea achiziției.
 	
-	Următoarele (???) secunde au ca scop realizarea unei calibrări a dispozitivului. În timpul acesteia, utilizatorul este instruit să privească anumite puncte de pe ecranul monitorului timp de 10 secunde, pentru a se realiza o medie a valorii semnalului obținut, ce va fi utilizată la realizarea unei transformări fereastră-poartă.
+	Următoarele 50 de secunde au ca scop realizarea unei calibrări a dispozitivului. În timpul acesteia, utilizatorul este instruit să privească anumite puncte de pe ecranul monitorului timp de 10 secunde, pentru a se realiza o medie a valorii semnalului obținut, ce va fi utilizată la realizarea unei transformări fereastră-poartă.
 	
 	Valorile din următoarele secunde reprezintă mișcările propriu-zise ce se vor a fi traduse în deplasări ale indicatorului mausului pe ecran, folosind pentru calibrare valorile obținute anterior.
 	
@@ -52,7 +52,7 @@
 	Procesarea datelor brute a avut ca scop:
 	\begin{itemize}[noitemsep,nolistsep]
 		\item eliminarea zgomotului
-		\item eliminarea unui trend general semnalului provenit din funcționarea normală a dispozitivului de achiziție
+		\item eliminarea unui trend general al semnalului provenit din funcționarea normală a dispozitivului de achiziție
 		\item simplificarea semnalului pentru obținerea de deplasări uniforme ale indicatorului mausului
 	\end{itemize}
 	
@@ -83,6 +83,7 @@
 		\item pentru canalul 1: $t = 45, f = \frac{1}{6}$
 		\item pentru canalul 2: $t = 67, f = \frac{1}{8}$
 	\end{itemize}
+	\subsection*{Rezultatele}
 	\end{multicols}
 	
 	\begin{figure}[h]
